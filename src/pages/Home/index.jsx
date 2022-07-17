@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { BlogItem, Button, Gap } from "../../components";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -6,12 +6,15 @@ import "./style.css";
 
 const Home = () => {
    const navigate = useNavigate();
+   const [news, setNews] = useState([]);
 
    useEffect(() => {
       axios
-         .get("http://localhost:2909/v1/news/get")
+         .get("http://localhost:2909/v1/news/get?page=2&perpage=10")
          .then((result) => {
             console.log(result.data);
+            const data = result.data;
+            setNews(data.data);
          })
          .catch((err) => console.log(err));
    }, []);
@@ -26,10 +29,18 @@ const Home = () => {
          </div>
          <Gap height={20} />
          <div className="content-news">
-            <BlogItem />
-            <BlogItem />
-            <BlogItem />
-            <BlogItem />
+            {news.map((data) => {
+               return (
+                  <BlogItem
+                     key={data._id}
+                     title={data.title}
+                     author={data.author.name}
+                     desc={data.desc}
+                     img={data.image}
+                     date={data.createdAt}
+                  />
+               );
+            })}
          </div>
          <div className="item-pagination">
             <Button title="Previous" />
