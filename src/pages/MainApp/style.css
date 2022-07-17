@@ -1,0 +1,18 @@
+.main-app-wrapper {
+   display: flex;
+   flex-direction: column;
+   height: 100vh;
+   background: #282c34;
+   color: #e5e7e9;
+   overflow: hidden;
+}
+.main-app-wrapper > .content-wrapper {
+   max-width: 992px;
+   margin: auto;
+   width: 100%;
+   flex: 1;
+   overflow-y: auto;
+}
+.main-app-wrapper > .content-wrapper::-webkit-scrollbar {
+   display: none;
+}

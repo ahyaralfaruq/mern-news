@@ -1,0 +1,11 @@
+.input-img-wrapper {
+   margin: 20px 0;
+}
+.input-img-wrapper > .img-preview {
+   width: 200px;
+   height: 200px;
+   object-fit: cover;
+   display: block;
+   margin-bottom: 16px;
+   border-radius: 8px;
+}

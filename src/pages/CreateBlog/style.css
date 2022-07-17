@@ -1,0 +1,12 @@
+.create-blog-wrapper {
+   padding-top: 40px;
+}
+.create-blog-wrapper > .blog-title {
+   font-size: 20px;
+   font-weight: 500;
+   margin-bottom: 30px;
+}
+.create-blog-wrapper > .button-action {
+   width: 200px;
+   margin: auto;
+}
