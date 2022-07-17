@@ -3,16 +3,21 @@ import { BlogItem, Button, Gap } from "../../components";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./style.css";
+import { useSelector } from "react-redux";
 
 const Home = () => {
    const navigate = useNavigate();
    const [news, setNews] = useState([]);
 
+   const globalState = useSelector((state) => state);
+
+   console.log(globalState);
+
    useEffect(() => {
       axios
          .get("http://localhost:2909/v1/news/get?page=2&perpage=10")
          .then((result) => {
-            console.log(result.data);
+            // console.log(result.data);
             const data = result.data;
             setNews(data.data);
          })

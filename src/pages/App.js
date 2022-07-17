@@ -1,9 +1,14 @@
 import React from "react";
-import { ConfRoutes } from "../config";
+import { Provider } from "react-redux";
+import { ConfRoutes, store } from "../config";
 import "./App.css";
 
 function App() {
-   return <ConfRoutes />;
+   return (
+      <Provider store={store}>
+         <ConfRoutes />
+      </Provider>
+   );
 }
 
 export default App;
