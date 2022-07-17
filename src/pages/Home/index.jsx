@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { BlogItem, Button, Gap } from "../../components";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -7,18 +7,15 @@ import { useDispatch, useSelector } from "react-redux";
 
 const Home = () => {
    const navigate = useNavigate();
-   // const [news, setNews] = useState([]);
 
-   const { news, nama } = useSelector((state) => state);
+   const { news } = useSelector((state) => state.homeReducer);
    const dispatch = useDispatch();
 
    useEffect(() => {
       axios
          .get("http://localhost:2909/v1/news/get?page=2&perpage=10")
          .then((result) => {
-            // console.log(result.data);
             const data = result.data;
-            // setNews(data.data);
             dispatch({ type: "UPDATE_NEWS", payload: data.data });
          })
          .catch((err) => console.log(err));
