@@ -3,15 +3,14 @@ import { BlogItem, Button, Gap } from "../../components";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./style.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const Home = () => {
    const navigate = useNavigate();
-   const [news, setNews] = useState([]);
+   // const [news, setNews] = useState([]);
 
-   const globalState = useSelector((state) => state);
-
-   console.log(globalState);
+   const { news, nama } = useSelector((state) => state);
+   const dispatch = useDispatch();
 
    useEffect(() => {
       axios
@@ -19,7 +18,8 @@ const Home = () => {
          .then((result) => {
             // console.log(result.data);
             const data = result.data;
-            setNews(data.data);
+            // setNews(data.data);
+            dispatch({ type: "UPDATE_NEWS", payload: data.data });
          })
          .catch((err) => console.log(err));
    }, []);
