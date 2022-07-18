@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { BlogItem, Button, Gap } from "../../components";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import "./style.css";
 import { useDispatch, useSelector } from "react-redux";
+import { setDataNews } from "../../config/redux/action";
 
 const Home = () => {
    const navigate = useNavigate();
@@ -12,13 +12,7 @@ const Home = () => {
    const dispatch = useDispatch();
 
    useEffect(() => {
-      axios
-         .get("http://localhost:2909/v1/news/get?page=2&perpage=10")
-         .then((result) => {
-            const data = result.data;
-            dispatch({ type: "UPDATE_NEWS", payload: data.data });
-         })
-         .catch((err) => console.log(err));
+      dispatch(setDataNews());
    }, []);
 
    return (
