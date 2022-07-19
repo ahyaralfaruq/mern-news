@@ -2,11 +2,15 @@ import React from "react";
 import { BgLogin } from "../../../assets";
 import "./style.css";
 
-const InputImages = () => {
+const InputImages = ({ img, ...rest }) => {
    return (
       <div className="input-img-wrapper">
-         <img src={BgLogin} alt="img-preview" className="img-preview" />
-         <input type="file" />
+         {img ? (
+            <img src={img} alt="img-preview" className="img-preview" />
+         ) : (
+            <img src={BgLogin} alt="img-preview" className="img-preview" />
+         )}
+         <input type="file" {...rest} />
       </div>
    );
 };
