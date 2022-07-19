@@ -11,7 +11,7 @@ const ConfRoutes = () => {
          <Routes>
             <Route path="/" element={<MainApp />}>
                <Route path="/create-blog" element={<CreateBlog />} />
-               <Route path="/detail-blog" element={<DetailBlog />} />
+               <Route path="/detail-blog/:id" element={<DetailBlog />} />
                <Route path="/" element={<Home />} />
             </Route>
             <Route path="/login" element={<Login />} />

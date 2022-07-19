@@ -43,6 +43,7 @@ const Home = () => {
                      desc={data.desc}
                      img={data.image}
                      date={data.createdAt}
+                     _id={data._id}
                   />
                );
             })}

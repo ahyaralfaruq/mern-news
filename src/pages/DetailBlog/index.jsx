@@ -1,31 +1,44 @@
-import React from "react";
-import { BgRegister } from "../../assets";
+import React, { useEffect, useState } from "react";
 import { Link, Gap } from "../../components";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import "./style.css";
+import axios from "axios";
 
 const DetailBlog = () => {
    const navigate = useNavigate();
+   const getParams = useParams();
+   const [data, setData] = useState({});
 
-   return (
-      <div className="detail-blog-wrapper">
-         <img
-            src={BgRegister}
-            alt="img-blog-detail"
-            className="img-blog-detail"
-         />
-         <p className="blog-title">title blog</p>
-         <p className="blog-author">author - date post</p>
-         <p className="blog-desc">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo eaque
-            laboriosam voluptas tenetur voluptate et. Id fuga error eos?
-            Deserunt recusandae reprehenderit provident voluptas ex quasi
-            suscipit modi sunt. Explicabo!
-         </p>
-         <Gap height={20} />
-         <Link title="Back to home page" onClick={() => navigate("/")} />
-      </div>
-   );
+   useEffect(() => {
+      const id = getParams.id;
+      axios
+         .get(`http://localhost:2909/v1/news/get/${id}`)
+         .then((res) => {
+            setData(res.data.data);
+         })
+         .catch((err) => console.error(err));
+   }, [getParams]);
+
+   if (data.author) {
+      return (
+         <div className="detail-blog-wrapper">
+            <img
+               src={`http://localhost:2909/${data.image}`}
+               alt="img-blog-detail"
+               className="img-blog-detail"
+            />
+            <p className="blog-title">{data.title}</p>
+            <p className="blog-author">
+               {data.author.name} - {data.createdAt}
+            </p>
+            <p className="blog-desc">{data.desc}</p>
+            <Gap height={20} />
+            <Link title="Back to home page" onClick={() => navigate("/")} />
+         </div>
+      );
+   }
+
+   return <h3>Loading...</h3>;
 };
 
 export default DetailBlog;

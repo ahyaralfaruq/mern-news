@@ -7,7 +7,7 @@ const BlogItem = (props) => {
    const navigate = useNavigate();
 
    // destructering variable
-   const { title, author, date, desc, img } = props;
+   const { title, author, date, desc, img, _id } = props;
 
    return (
       <div className="blog-item-wrapper">
@@ -24,7 +24,7 @@ const BlogItem = (props) => {
             <p className="item-desc">{desc}</p>
             <Button
                title="View detail"
-               onClick={() => navigate("/detail-blog")}
+               onClick={() => navigate(`/detail-blog/${_id}`)}
             />
          </div>
       </div>
