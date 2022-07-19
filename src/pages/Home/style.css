@@ -16,3 +16,9 @@
    width: 400px;
    margin: auto;
 }
+.item-pagination > .text-page {
+   width: 200px;
+   margin: 0;
+   text-align: center;
+   line-height: 2;
+}

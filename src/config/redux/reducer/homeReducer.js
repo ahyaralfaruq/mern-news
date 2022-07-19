@@ -1,6 +1,9 @@
 const initialStateHome = {
    news: [],
-   nama: "Muhammad Ahyar",
+   pages: {
+      currentPage: 1,
+      totalPage: 1,
+   },
 };
 
 const homeReducer = (state = initialStateHome, action) => {
@@ -9,6 +12,13 @@ const homeReducer = (state = initialStateHome, action) => {
       return {
          ...state,
          news: action.payload,
+      };
+   }
+
+   if (action.type === "UPDATE_PAGE_NEWS") {
+      return {
+         ...state,
+         pages: action.payload,
       };
    }
 
