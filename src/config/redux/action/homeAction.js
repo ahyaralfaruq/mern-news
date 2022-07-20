@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const setDataNews = (page) => (dispatch) => {
    axios
-      .get(`http://localhost:2909/v1/news/get?page=${page}&perpage=10`)
+      .get(`http://localhost:2909/v1/news/get?page=${page}&perpage=4`)
       .then((result) => {
          const data = result.data;
          dispatch({ type: "UPDATE_NEWS", payload: data.data });

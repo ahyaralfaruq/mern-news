@@ -7,7 +7,7 @@ const BlogItem = (props) => {
    const navigate = useNavigate();
 
    // destructering variable
-   const { title, author, date, desc, img, _id } = props;
+   const { title, author, date, desc, img, _id, onDelete } = props;
 
    return (
       <div className="blog-item-wrapper">
@@ -26,7 +26,9 @@ const BlogItem = (props) => {
                   >
                      Edit
                   </p>
-                  <p className="delete">Delete</p>
+                  <p className="delete" onClick={() => onDelete(_id)}>
+                     Delete
+                  </p>
                </div>
             </div>
             <p className="item-author">
