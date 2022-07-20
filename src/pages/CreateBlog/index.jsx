@@ -1,6 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setFormNews, setImgPrev, postToAPI } from "../../config/redux/action";
+import {
+   setFormNews,
+   setImgPrev,
+   postToAPI,
+   updateToAPI,
+} from "../../config/redux/action";
 import {
    Input,
    Button,
@@ -9,8 +14,9 @@ import {
    Gap,
    Link,
 } from "../../components";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import "./style.css";
+import axios from "axios";
 
 const CreateBlog = () => {
    const { formNews, imgPrev } = useSelector(
@@ -19,6 +25,25 @@ const CreateBlog = () => {
    const { title, desc } = formNews;
    const dispatch = useDispatch();
    const navigate = useNavigate();
+   const getParams = useParams();
+   const [isUpdate, setIsUpdate] = useState(false);
+
+   useEffect(() => {
+      const id = getParams.id;
+
+      if (id) {
+         setIsUpdate(true);
+         axios
+            .get(`http://localhost:2909/v1/news/get/${id}`)
+            .then((res) => {
+               const data = res.data.data;
+               dispatch(setFormNews("title", data.title));
+               dispatch(setImgPrev(`http://localhost:2909/${data.image}`));
+               dispatch(setFormNews("desc", data.desc));
+            })
+            .catch();
+      }
+   }, [dispatch, getParams]);
 
    const onUploadImg = (e) => {
       const file = e.target.files[0];
@@ -27,13 +52,19 @@ const CreateBlog = () => {
    };
 
    const onSubmit = () => {
-      postToAPI(formNews);
+      const id = getParams.id;
+
+      if (isUpdate) {
+         updateToAPI(formNews, id);
+      } else {
+         postToAPI(formNews);
+      }
    };
 
    return (
       <div className="create-blog-wrapper">
          <Link title="back to home page" onClick={() => navigate("/")} />
-         <p className="blog-title">Create News</p>
+         <p className="blog-title">{isUpdate ? "Update" : "Create"} News</p>
          <Input
             placeholder="Type your title"
             value={title}
@@ -47,7 +78,7 @@ const CreateBlog = () => {
          />
          <Gap height={20} />
          <div className="button-action" onClick={onSubmit}>
-            <Button title="Save" />
+            <Button title={isUpdate ? "Update" : "Save"} />
          </div>
       </div>
    );

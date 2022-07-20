@@ -31,3 +31,20 @@ export const postToAPI = (data) => {
       .then((res) => console.log(res))
       .catch((err) => console.error(err));
 };
+
+export const updateToAPI = (data, id) => {
+   const sendData = new FormData();
+
+   sendData.append("title", data.title);
+   sendData.append("image", data.image);
+   sendData.append("desc", data.desc);
+
+   axios
+      .put(`http://localhost:2909/v1/news/post/${id}`, sendData, {
+         headers: {
+            "content-type": "multipart/form-data",
+         },
+      })
+      .then((res) => console.log(res))
+      .catch((err) => console.error(err));
+};

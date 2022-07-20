@@ -17,7 +17,18 @@ const BlogItem = (props) => {
             className="img-thumb"
          />
          <div className="content-detail">
-            <p className="item-title">{title}</p>
+            <div className="title-wrapper">
+               <p className="item-title">{title}</p>
+               <div className="menu-wrapper">
+                  <p
+                     className="edit"
+                     onClick={() => navigate(`/create-blog/${_id}`)}
+                  >
+                     Edit
+                  </p>
+                  <p className="delete">Delete</p>
+               </div>
+            </div>
             <p className="item-author">
                {author} - {date}
             </p>

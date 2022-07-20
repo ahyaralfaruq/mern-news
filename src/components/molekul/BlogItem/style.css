@@ -14,11 +14,38 @@
 .blog-item-wrapper > .content-detail {
    padding: 16px;
 }
-.blog-item-wrapper > .content-detail > .item-title {
+.blog-item-wrapper > .content-detail > .title-wrapper {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+}
+.blog-item-wrapper > .content-detail > .title-wrapper > .item-title {
    margin: 0;
    font-size: 20px;
    font-weight: 500;
    color: #e5e7e9;
+}
+.blog-item-wrapper > .content-detail > .title-wrapper > .menu-wrapper {
+   display: flex;
+   align-items: center;
+}
+.blog-item-wrapper > .content-detail > .title-wrapper > .menu-wrapper > .edit {
+   font-weight: 500;
+   color: #f03af4;
+   cursor: pointer;
+   margin: 0;
+   margin-right: 14px;
+}
+.blog-item-wrapper
+   > .content-detail
+   > .title-wrapper
+   > .menu-wrapper
+   > .delete {
+   font-weight: 500;
+   color: #e91e63;
+   cursor: pointer;
+   margin: 0;
+   margin-left: 14px;
 }
 .blog-item-wrapper > .content-detail > .item-author {
    margin: 0;
